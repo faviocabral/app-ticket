@@ -50,6 +50,18 @@
   <!-- SweetAlert2 JS -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
+  function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|WPDesktop/i.test(navigator.userAgent);
+  }
+
+  if (isMobile()) {
+    console.log("El dispositivo es móvil");
+    // Realiza acciones específicas para dispositivos móviles
+  } else {
+    console.log("El dispositivo no es móvil");
+    // Realiza acciones específicas para dispositivos de escritorio
+  }
+
     let nroTicket = localStorage.getItem('nroTicket') || 0
     let nroBoleta = localStorage.getItem('nroBoleta') || 0
       async function handleButtonClick(buttonNumber) {
