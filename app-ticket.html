@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,10 +10,27 @@
   <!-- SweetAlert2 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>  
+  <style>
+    .resaltado {
+      background-color: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* sombra que sobresale */
+      transition: box-shadow 0.3s ease;
+    }
+
+    .resaltado:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35); /* más sombra al pasar el mouse */
+    }
+  .emoji-resaltado {
+    font-size: 3rem;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8); /* sombra dorada difusa */
+  }
+  </style>
 </head>
 <body>
   <div class="container mt-5">
-    <h1 class="text-center mb-4">Entrada de Datos...</h1>
+    <h1 class="text-center mb-4">Entrada de Datos <span class="emoji-resaltado">⚙️</span> </h1>
     <div class="row">
       <!-- Generar 9 botones -->
       <div class="col-4 mb-3">
@@ -212,22 +230,23 @@
                     <div class="item">
                         <span class="texto-full">${texto}</span>
                     </div>
-                    <div class="line"></div>
-                    <div class="center m-2"> <p>¡Gracias por su compra!</p></div>
-                    <div class="line"></div>
-                    <div class="item">
-                     <span id="fecha"><strong>Fecha:</strong> ${myfecha}</span>
-                     <span id="hora"><strong>Hora:</strong> ${myhora}</span>
+                     <!-- <div class="line"></div>
+                     <div class="center m-2"> <p>¡Gracias por su compra!</p></div>
+                     <div class="line"></div>-->
+                    <div class="item mt-2 mb-2">
+                     <span id="ticket"><strong></strong>#${('000000'+nroTicket).slice(-6) }</span>
+                     <span id="fecha"><strong></strong> ${myfecha}</span>
+                     <span id="hora"><strong></strong> ${myhora}</span>
                     </div>
-                    <div class="item">
-                     <span id="fecha"><strong>Ticket: </strong>#${('000000'+nroTicket).slice(-6) }</span>
-                    </div>
+                    <!--<div class="item">
+                     <span id="ticket"><strong></strong>#${('000000'+nroTicket).slice(-6) }</span>
+                    </div>-->
 
                     <div class="item">
                      <span id="turno"><strong>Turno:</strong>0${turno}</span>
                      <span id="nroBoleta"><strong>Boleta: </strong>#${('00000'+nroBoleta).slice(-5)}</span>
                     </div>
-                    <div class="line"></div>
+                    <!-- <div class="line"></div>-->
                     <div class="item">
                      <span id="fecha"><strong></strong> ${buttonNumber} x ${monto}</span>
                      <span id="hora"><strong></strong>Gs ${monto}</span>
@@ -236,7 +255,7 @@
                      <span id="categoria"><strong>Categoria:</strong>0${buttonNumber}</span>
                      <span id="caja"><strong></strong></span>
                     </div>
-                    <div class="line"></div>
+                    <!-- <div class="line"></div> -->
 
                     <div class="item mt-2">
                      <span id="categoria" style="width:100%; text-align:center;"><strong>Caja: &nbsp;&nbsp; GS ${monto}</strong></span>
