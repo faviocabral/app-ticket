@@ -123,10 +123,12 @@
 
     let nroTicket = localStorage.getItem('nroTicket') || 0
     let nroBoleta = localStorage.getItem('nroBoleta') || 0
+    let monto = localStorage.getItem('monto') || 0
       async function handleButtonClick(buttonNumber) {
         setTimeout(() => {
           $("#nroTicket").val(Number(localStorage.getItem("nroTicket")) + 1 )
           $("#nroBoleta").val(Number(localStorage.getItem("nroBoleta")) + 1 )
+          $("#monto").val(Number(localStorage.getItem("monto")) )
           setTurno()
         }, 300);
 
@@ -188,6 +190,7 @@
             const texto = document.getElementById('texto').value;
             localStorage.setItem('nroTicket', Number(nroTicket))
             localStorage.setItem('nroBoleta', Number(nroBoleta))
+            localStorage.setItem('monto', Number(monto))
             // Validar que los campos no estén vacíos
             if (!nroTicket || !nroBoleta || !texto || !monto) {
               Swal.showValidationMessage('Todos los campos son obligatorios')
@@ -211,7 +214,7 @@
               title: 'Ticket',
               html: `
                 <style>
-                  .ticket { width: 58mm; font-family: Arial, sans-serif; font-size: 12px; margin: 0; padding: 0; box-shadow: 0 0 1px rgba(0,0,0,.125),0 1px 3px rgba(0,0,0,.2);}
+                  .ticket { width: 58mm; font-family: Arial, sans-serif; font-size: 14px; margin: 0; padding: 0; box-shadow: 0 0 1px rgba(0,0,0,.125),0 1px 3px rgba(0,0,0,.2);}
                   .ticket { padding: 10px; }
                   .center { text-align: center; }
                   .bold { font-weight: bold; }
@@ -264,20 +267,21 @@
                   <head>
                     <title>Imprimir Ticket</title>
                     <style>
-                      .ticket { width: 58mm; font-family: Arial, sans-serif; font-size: 12px; margin: 0; padding: 0; box-shadow: 0 0 1px rgba(0,0,0,.125),0 1px 3px rgba(0,0,0,.2);}
+                      .ticket { font-family: Arial, sans-serif; font-size: 14px; margin: 0; padding: 0; box-shadow: 0 0 1px rgba(0,0,0,.125),0 1px 3px rgba(0,0,0,.2);}
                       .ticket { padding: 10px; }
                       .center { text-align: center; }
                       .bold { font-weight: bold; }
                       .line { border-top: 1px dashed black; margin: 5px 0; }
                       .item { display: flex; justify-content: space-between; }
-                      .total { margin-top: 10px; font-size: 14px; font-weight: bold; }
-                      .nroCompra { font-size: 14px; font-weight: bold; margin-top: 10px; margin-bottom: 10px; }
-                      .texto-full { text-align: center; white-space: pre-line; width: 100%; }
+                      .total { margin-top: 10px; font-size: 16px; font-weight: bold; }
+                      .nroCompra { font-size: 16px; font-weight: bold; margin-top: 10px; margin-bottom: 10px; }
+                      .texto-full { text-align: center; white-space: pre-line;}
+                      .titulo{display: flex; justify-content: center}
                     </style>
                   </head>
                   <body>
                     <div class="ticket">
-                      <div class="item">
+                      <div class="item titulo" >
                         <span class="texto-full">${texto}</span>
                       </div>
                       <div class="item mt-2 mb-2">
@@ -309,8 +313,8 @@
                 printWindow.document.write(ticketHtml);
                 printWindow.document.close();
                 printWindow.focus();
-                printWindow.print();
-                printWindow.close();
+                //printWindow.print();
+                //printWindow.close();
               }
             });
             return formData;
