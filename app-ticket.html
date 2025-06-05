@@ -264,8 +264,6 @@
               if (result.isConfirmed) {
                 // Genera el HTML para impresión
                 const ticketHtml = `
-                  <html>
-                  <head>
                     <title>Imprimir Ticket</title>
                     <style>
                       .ticket { font-family: Arial, sans-serif; font-size: 14px; margin: 0; padding: 0; box-shadow: 0 0 1px rgba(0,0,0,.125),0 1px 3px rgba(0,0,0,.2);}
@@ -279,8 +277,6 @@
                       .texto-full { text-align: center; white-space: pre-line;}
                       .titulo{display: flex; justify-content: center}
                     </style>
-                  </head>
-                  <body>
                     <div class="ticket">
                       <div class="item titulo" >
                         <span class="texto-full">${texto}</span>
@@ -306,8 +302,6 @@
                         <span id="categoria" style="width:100%; text-align:center;"><strong>Caja: &nbsp;&nbsp; GS ${monto}</strong></span>
                       </div>
                     </div>
-                  </body>
-                  </html>
                 `;
                 // Abre una ventana nueva e imprime
                 const printWindow = window.open('', '', 'width=400,height=600');
