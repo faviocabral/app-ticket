@@ -125,10 +125,11 @@
     let nroBoleta = localStorage.getItem('nroBoleta') || 0
     let monto = localStorage.getItem('monto') || 0
       async function handleButtonClick(buttonNumber) {
+        localStorage.setItem('boton', buttonNumber)
         setTimeout(() => {
           $("#nroTicket").val(Number(localStorage.getItem("nroTicket")) + 1 )
           $("#nroBoleta").val(Number(localStorage.getItem("nroBoleta")) + 1 )
-          $("#monto").val(Number(localStorage.getItem("monto")) )
+          $("#monto").val(Number(localStorage.getItem(`b${buttonNumber}-monto`)) )
           setTurno()
         }, 300);
 
@@ -190,7 +191,7 @@
             const texto = document.getElementById('texto').value;
             localStorage.setItem('nroTicket', Number(nroTicket))
             localStorage.setItem('nroBoleta', Number(nroBoleta))
-            localStorage.setItem('monto', Number(monto))
+            localStorage.setItem(`b${localStorage.getItem('boton')}-monto`, Number(monto))
             // Validar que los campos no estén vacíos
             if (!nroTicket || !nroBoleta || !texto || !monto) {
               Swal.showValidationMessage('Todos los campos son obligatorios')
