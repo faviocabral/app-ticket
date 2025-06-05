@@ -184,12 +184,12 @@
             const nroTicket = document.getElementById('nroTicket').value;
             const nroBoleta = document.getElementById('nroBoleta').value;
             const monto = document.getElementById('monto').value;
-            //const turno =  Number(localStorage.getItem('turno'));
+            const turno =  Number(localStorage.getItem('turno'));
             const texto = document.getElementById('texto').value;
             localStorage.setItem('nroTicket', Number(nroTicket))
             localStorage.setItem('nroBoleta', Number(nroBoleta))
             // Validar que los campos no estén vacíos
-            if (!nroTicket || !nroBoleta || !turno || !texto || !monto) {
+            if (!nroTicket || !nroBoleta || !texto || !monto) {
               Swal.showValidationMessage('Todos los campos son obligatorios')
               return null;
             }
@@ -198,7 +198,7 @@
             const formData = {
               nroTicket: nroTicket,
               nroBoleta: nroBoleta,
-              turno: localStorage.getItem('turno'),
+              turno: turno,
               texto: texto
             };
             console.log(formData);
@@ -206,117 +206,114 @@
             myfecha = fecha.toLocaleDateString()
             myhora  = fecha.toLocaleTimeString().slice(0,5) 
 
-          Swal.fire({
-            title: 'Ticket',
-            html:`
-            
+          // ...dentro de tu función handleButtonClick, reemplaza el Swal.fire del ticket por esto...
+            Swal.fire({
+              title: 'Ticket',
+              html: `
                 <style>
-                    /* Estilo general para el ticket */
-                    .ticket {
-                    width: 58mm;
-                    font-family: Arial, sans-serif;
-                    font-size: 12px;
-                    margin: 0;
-                    padding: 0;
-                    box-shadow: 0 0 1px rgba(0,0,0,.125),0 1px 3px rgba(0,0,0,.2);
-                    }
-
-                    p{
-                    margin: 0;
-                    padding: 0;
-                    }
-                    .ticket {
-                    padding: 10px;
-                    }
-
-                    .center {
-                    text-align: center;
-                    }
-
-                    .bold {
-                    font-weight: bold;
-                    }
-
-                    .line {
-                    border-top: 1px dashed black;
-                    margin: 5px 0;
-                    }
-
-                    .item {
-                    display: flex;
-                    justify-content: space-between;
-                    }
-
-                    .total {
-                    margin-top: 10px;
-                    font-size: 14px;
-                    font-weight: bold;
-                    }
-                    .nroCompra {
-                    font-size: 14px;
-                    font-weight: bold;
-                    margin-top: 10px;
-                    margin-bottom: 10px;
-                    }
-                    .texto-full {
-                    text-align: center;
-                    white-space: pre-line;
-                    width: 100%;
-                    }
+                  .ticket { width: 58mm; font-family: Arial, sans-serif; font-size: 12px; margin: 0; padding: 0; box-shadow: 0 0 1px rgba(0,0,0,.125),0 1px 3px rgba(0,0,0,.2);}
+                  .ticket { padding: 10px; }
+                  .center { text-align: center; }
+                  .bold { font-weight: bold; }
+                  .line { border-top: 1px dashed black; margin: 5px 0; }
+                  .item { display: flex; justify-content: space-between; }
+                  .total { margin-top: 10px; font-size: 14px; font-weight: bold; }
+                  .nroCompra { font-size: 14px; font-weight: bold; margin-top: 10px; margin-bottom: 10px; }
+                  .texto-full { text-align: center; white-space: pre-line; width: 100%; }
                 </style>
-                </head>
-                <body>
-                <div class="ticket">
-                    <div class="item">
-                        <span class="texto-full">${texto}</span>
-                    </div>
-                     <!-- <div class="line"></div>
-                     <div class="center m-2"> <p>¡Gracias por su compra!</p></div>
-                     <div class="line"></div>-->
-                    <div class="item mt-2 mb-2">
-                     <span id="ticket"><strong></strong>#${('000000'+nroTicket).slice(-6) }</span>
-                     <span id="fecha"><strong></strong> ${myfecha}</span>
-                     <span id="hora"><strong></strong> ${myhora}</span>
-                    </div>
-                    <!--<div class="item">
-                     <span id="ticket"><strong></strong>#${('000000'+nroTicket).slice(-6) }</span>
-                    </div>-->
-
-                    <div class="item">
-                     <span id="turno"><strong>Turno:</strong>0${turno}</span>
-                     <span id="nroBoleta"><strong>Boleta: </strong>#${('00000'+nroBoleta).slice(-5)}</span>
-                    </div>
-                    <!-- <div class="line"></div>-->
-                    <div class="item">
-                     <span id="fecha"><strong></strong> ${buttonNumber} x ${monto}</span>
-                     <span id="hora"><strong></strong>Gs ${monto}</span>
-                    </div>
-                    <div class="item mt-1">
-                     <span id="categoria"><strong>Categoria:</strong>0${buttonNumber}</span>
-                     <span id="caja"><strong></strong></span>
-                    </div>
-                    <!-- <div class="line"></div> -->
-
-                    <div class="item mt-2">
-                     <span id="categoria" style="width:100%; text-align:center;"><strong>Caja: &nbsp;&nbsp; GS ${monto}</strong></span>
-                    </div>
-
-                    <!-- <div class="total">
-                    <div class="item">
-                        <span>Total</span>
-                        <span>10000</span>
-                    </div>
-                    </div> -->
-
+                <div class="ticket" id="ticket-content">
+                  <div class="item">
+                    <span class="texto-full">${texto}</span>
+                  </div>
+                  <div class="item mt-2 mb-2">
+                    <span id="ticket"><strong></strong>#${('000000'+nroTicket).slice(-6) }</span>
+                    <span id="fecha"><strong></strong> ${myfecha}</span>
+                    <span id="hora"><strong></strong> ${myhora}</span>
+                  </div>
+                  <div class="item">
+                    <span id="turno"><strong>Turno:</strong>0${turno}</span>
+                    <span id="nroBoleta"><strong>Boleta: </strong>#${('00000'+nroBoleta).slice(-5)}</span>
+                  </div>
+                  <div class="item">
+                    <span id="fecha"><strong></strong> ${buttonNumber} x ${monto}</span>
+                    <span id="hora"><strong></strong>Gs ${monto}</span>
+                  </div>
+                  <div class="item mt-1">
+                    <span id="categoria"><strong>Categoria:</strong>0${buttonNumber}</span>
+                    <span id="caja"><strong></strong></span>
+                  </div>
+                  <div class="item mt-2">
+                    <span id="categoria" style="width:100%; text-align:center;"><strong>Caja: &nbsp;&nbsp; GS ${monto}</strong></span>
+                  </div>
                 </div>
-           
-            `,
-            width: '290px',
-            confirmButtonText: `imprimir ticket`,
-            cancelButtonText: `cancelar`,
-            showCloseButton: true,
-            showCancelButton: true,
-          })
+              `,
+              width: '290px',
+              confirmButtonText: `imprimir ticket`,
+              cancelButtonText: `cancelar`,
+              showCloseButton: true,
+              showCancelButton: true,
+              didOpen: () => {
+                // Permite seleccionar texto si se desea
+                document.getElementById('ticket-content').style.userSelect = 'text';
+              }
+            }).then((result) => {
+              if (result.isConfirmed) {
+                // Genera el HTML para impresión
+                const ticketHtml = `
+                  <html>
+                  <head>
+                    <title>Imprimir Ticket</title>
+                    <style>
+                      .ticket { width: 58mm; font-family: Arial, sans-serif; font-size: 12px; margin: 0; padding: 0; box-shadow: 0 0 1px rgba(0,0,0,.125),0 1px 3px rgba(0,0,0,.2);}
+                      .ticket { padding: 10px; }
+                      .center { text-align: center; }
+                      .bold { font-weight: bold; }
+                      .line { border-top: 1px dashed black; margin: 5px 0; }
+                      .item { display: flex; justify-content: space-between; }
+                      .total { margin-top: 10px; font-size: 14px; font-weight: bold; }
+                      .nroCompra { font-size: 14px; font-weight: bold; margin-top: 10px; margin-bottom: 10px; }
+                      .texto-full { text-align: center; white-space: pre-line; width: 100%; }
+                    </style>
+                  </head>
+                  <body>
+                    <div class="ticket">
+                      <div class="item">
+                        <span class="texto-full">${texto}</span>
+                      </div>
+                      <div class="item mt-2 mb-2">
+                        <span id="ticket"><strong></strong>#${('000000'+nroTicket).slice(-6) }</span>
+                        <span id="fecha"><strong></strong> ${myfecha}</span>
+                        <span id="hora"><strong></strong> ${myhora}</span>
+                      </div>
+                      <div class="item">
+                        <span id="turno"><strong>Turno:</strong>0${turno}</span>
+                        <span id="nroBoleta"><strong>Boleta: </strong>#${('00000'+nroBoleta).slice(-5)}</span>
+                      </div>
+                      <div class="item">
+                        <span id="fecha"><strong></strong> ${buttonNumber} x ${monto}</span>
+                        <span id="hora"><strong></strong>Gs ${monto}</span>
+                      </div>
+                      <div class="item mt-1">
+                        <span id="categoria"><strong>Categoria:</strong>0${buttonNumber}</span>
+                        <span id="caja"><strong></strong></span>
+                      </div>
+                      <div class="item mt-2">
+                        <span id="categoria" style="width:100%; text-align:center;"><strong>Caja: &nbsp;&nbsp; GS ${monto}</strong></span>
+                      </div>
+                    </div>
+                  </body>
+                  </html>
+                `;
+                // Abre una ventana nueva e imprime
+                const printWindow = window.open('', '', 'width=400,height=600');
+                printWindow.document.write(ticketHtml);
+                printWindow.document.close();
+                printWindow.focus();
+                printWindow.print();
+                printWindow.close();
+              }
+            });
+            return formData;
         }
       });
 
